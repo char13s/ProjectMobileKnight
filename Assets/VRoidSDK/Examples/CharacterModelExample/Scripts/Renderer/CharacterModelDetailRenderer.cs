@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Pixiv.VroidSdk.Api.DataModel;
 using Pixiv.VroidSdk.Localize;
 using Pixiv.VroidSdk.Decorator;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -448,6 +448,41 @@ namespace UniGLTF
                 return false;
             }
             return true;
+        }
+
+        public enum PrefabType
+        {
+            PrefabAsset,
+            PrefabInstance,
+            NotPrefab,
+        }
+
+        /// <summary>
+        /// Scene と Prefab で挙動をスイッチする。
+        /// 
+        /// - Scene: ヒエラルキーを操作する。Asset の 書き出しはしない。UNDO はする。TODO: 明示的な Asset の書き出し。
+        /// - Prefab: 対象をコピーして処理する。Undo は実装しない。結果を Asset として書き出し、処理後にコピーは削除する。
+        /// 
+        /// </summary>
+        public static PrefabType GetPrefabType(this GameObject go)
+        {
+            if (go == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (!go.scene.IsValid())
+            {
+                return PrefabType.PrefabAsset;
+            }
+
+#if UNITY_EDITOR
+            if (PrefabUtility.GetOutermostPrefabInstanceRoot(go) != null)
+            {
+                return PrefabType.PrefabInstance;
+            }
+#endif
+
+            return PrefabType.NotPrefab;
         }
     }
 }

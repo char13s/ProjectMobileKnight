@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VRoidSDK.Examples.Core.Localize;
 using UnityEngine;
 using UnityEngine.UI;

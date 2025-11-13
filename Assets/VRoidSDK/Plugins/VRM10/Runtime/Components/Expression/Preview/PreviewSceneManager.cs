@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
@@ -27,7 +27,7 @@ namespace UniVRM10
             PreviewSceneManager manager = null;
 
             // if we already instantiated a PreviewInstance previously but just lost the reference, then use that same instance instead of making a new one
-            var managers = GameObject.FindObjectsOfType<PreviewSceneManager>();
+            var managers = GameObject.FindObjectsByType<PreviewSceneManager>(FindObjectsSortMode.InstanceID);
             foreach (var x in managers)
             {
                 if (x.Prefab == prefab)

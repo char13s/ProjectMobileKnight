@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace VRoidSDK.Examples.Core.View.Parts
 {

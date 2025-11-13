@@ -1,4 +1,4 @@
-﻿namespace VRoidSDK.Examples.Core.View
+namespace VRoidSDK.Examples.Core.View
 {
     public class DeviceLoginView : BaseView
     {

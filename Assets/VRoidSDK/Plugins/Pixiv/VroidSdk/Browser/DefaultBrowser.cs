@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Pixiv.VroidSdk.Oauth;
 using UnityEngine;
 

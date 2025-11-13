@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Pixiv.VroidSdk;
 using Pixiv.VroidSdk.Api;
 using Pixiv.VroidSdk.Api.Params;

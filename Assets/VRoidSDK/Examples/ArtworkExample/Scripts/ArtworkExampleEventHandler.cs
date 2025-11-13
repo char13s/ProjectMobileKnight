@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using VRoidSDK.Examples.Core.Localize;
 
 namespace VRoidSDK.Examples.ArtworkExample

@@ -1,4 +1,4 @@
-﻿
+
 namespace VRoidSDK.Examples.Core.View.Parts
 {
     public class ToggleNumericValue : BaseView

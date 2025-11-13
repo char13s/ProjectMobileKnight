@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
 #if UNITY_IOS
+using System;
+using System.IO;
+using UnityEngine;
 using UnityEditor.iOS.Xcode;
 #endif
-using UnityEngine;
-using Pixiv.VroidSdk.Legacy;
 
 namespace Pixiv.VroidSdk.Editor
 {

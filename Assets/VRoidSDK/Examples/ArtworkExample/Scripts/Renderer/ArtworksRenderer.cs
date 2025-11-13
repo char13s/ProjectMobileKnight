@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VRoidSDK.Examples.Core.View;
 using VRoidSDK.Examples.Core.Renderer;
 using VRoidSDK.Examples.Core.Localize;

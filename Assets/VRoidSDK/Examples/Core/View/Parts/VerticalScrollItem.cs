@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace VRoidSDK.Examples.Core.View.Parts
 {

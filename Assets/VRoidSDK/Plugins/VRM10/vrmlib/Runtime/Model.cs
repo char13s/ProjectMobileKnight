@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +25,7 @@ namespace VrmLib
         public Coordinates Coordinates;
 
         public string AssetVersion = "2.0";
-        public string AssetGenerator;
+        public string AssetGenerator = $"UniVRM-{PackageVersion.VERSION}";
         public string AssetCopyright;
         public string AssetMinVersion;
 

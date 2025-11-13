@@ -1,4 +1,4 @@
-﻿using Pixiv.VroidSdk.Localize;
+using Pixiv.VroidSdk.Localize;
 
 namespace VRoidSDK.Examples.Core.Localize
 {

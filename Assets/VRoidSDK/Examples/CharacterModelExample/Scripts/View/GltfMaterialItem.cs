@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using VRoidSDK.Examples.Core.View.Parts;
 using Pixiv.VroidSdk.Api.DataModel;
 using Pixiv.VroidSdk.Decorator;

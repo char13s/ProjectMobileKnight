@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using Pixiv.VroidSdk.Api.DataModel; // Add DataModel reference
 

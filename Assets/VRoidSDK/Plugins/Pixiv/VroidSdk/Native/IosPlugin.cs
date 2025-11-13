@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 namespace Pixiv.VroidSdk.Native
 {
 #if !UNITY_EDITOR && UNITY_IOS

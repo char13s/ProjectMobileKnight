@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using VRoidSDK.Examples.Core.View.Parts;
 using VRoidSDK.Examples.Core.View;

@@ -1,4 +1,4 @@
-﻿using Pixiv.VroidSdk.Oauth;
+using Pixiv.VroidSdk.Oauth;
 
 namespace Pixiv.VroidSdk.Browser
 {

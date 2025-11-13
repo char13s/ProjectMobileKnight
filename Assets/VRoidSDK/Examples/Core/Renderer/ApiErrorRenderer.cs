@@ -1,4 +1,4 @@
-﻿using Pixiv.VroidSdk.Api.DataModel;
+using Pixiv.VroidSdk.Api.DataModel;
 using Pixiv.VroidSdk.Logger;
 using VRoidSDK.Examples.Core.View;
 using VRoidSDK.Examples.Core.Model;

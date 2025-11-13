@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using VRoidSDK.Examples.Core.Controller;
 using VRoidSDK.Examples.Core.Renderer;
 using VRoidSDK.Examples.ArtworkExample.Renderer;

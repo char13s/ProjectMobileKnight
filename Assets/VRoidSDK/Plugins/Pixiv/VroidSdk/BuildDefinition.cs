@@ -1,4 +1,4 @@
-﻿#if !UNITY_EDITOR && UNITY_ANDROID && ENABLE_MONO
+#if !UNITY_EDITOR && UNITY_ANDROID && ENABLE_MONO
 #error Unsupported for Mono Build on Android. Please use IL2CPP Scripting Backend for Android Devices.
 #endif
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Pixiv.VroidSdk.Networking;
 
 namespace Pixiv.VroidSdk.Browser

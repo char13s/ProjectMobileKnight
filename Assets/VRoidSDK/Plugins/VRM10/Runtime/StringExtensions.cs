@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using UnityEngine;
 
 namespace UniVRM10
@@ -67,6 +67,10 @@ namespace UniVRM10
             {
                 path = path.Replace(x, '+');
             }
+            if (path.StartsWith('.'))
+                path = '+' + path;
+            if (path == "")
+                path = "(empty)";
             return path;
         }
     }

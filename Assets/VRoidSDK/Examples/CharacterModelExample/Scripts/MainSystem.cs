@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using VRoidSDK.Examples.Core.Localize;
@@ -16,7 +16,7 @@ namespace VRoidSDK.Examples.CharacterModelExample
         public override void OnModelLoaded(string modelId, GameObject go)
         {
             DeleteAllChildren();
-            go.transform.parent = transform;
+            go.transform.SetParent(transform, false);
         }
 
         public override void OnLangChanged(Translator.Locales locale)

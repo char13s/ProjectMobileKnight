@@ -1,4 +1,4 @@
-﻿using VRoidSDK;
+using VRoidSDK;
 using VRoidSDK.Examples.Core.Localize;
 using UnityEngine;
 

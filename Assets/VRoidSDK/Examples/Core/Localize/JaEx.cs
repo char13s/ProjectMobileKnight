@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Pixiv.VroidSdk.Localize;
 
 namespace VRoidSDK.Examples.Core.Localize

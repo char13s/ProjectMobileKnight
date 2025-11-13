@@ -1,4 +1,4 @@
-﻿using VRoidSDK.Examples.Core.View;
+using VRoidSDK.Examples.Core.View;
 using UnityEngine;
 using UnityEngine.UI;
 

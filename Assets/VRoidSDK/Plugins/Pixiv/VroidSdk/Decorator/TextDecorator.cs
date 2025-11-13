@@ -1,4 +1,4 @@
-﻿
+
 namespace Pixiv.VroidSdk.Decorator
 {
     /// <summary>

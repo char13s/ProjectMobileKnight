@@ -1,4 +1,4 @@
-﻿
+
 namespace VRoidSDK.Examples.Core.View
 {
     public class RootView : BaseView

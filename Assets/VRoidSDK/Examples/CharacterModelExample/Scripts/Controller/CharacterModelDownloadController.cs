@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Pixiv.VroidSdk.Api.DataModel;
 using VRoidSDK.Examples.Core.Controller;
 using VRoidSDK.Examples.Core.Renderer;

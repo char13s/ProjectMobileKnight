@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Pixiv.VroidSdk.Api.DataModel; // Add DataModel reference
 using VRoidSDK.Examples.Core.Renderer;
 

@@ -1,4 +1,4 @@
-﻿using Pixiv.VroidSdk.Oauth;
+using Pixiv.VroidSdk.Oauth;
 using Pixiv.VroidSdk.Browser;
 using Pixiv.VroidSdk.Logger;
 using Pixiv.VroidSdk.Oauth.DataModel;

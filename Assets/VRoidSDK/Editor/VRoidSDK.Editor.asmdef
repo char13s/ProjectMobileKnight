@@ -1,0 +1,12 @@
+{
+    "name": "VRoidSDK.Editor",
+    "references": [
+        "VRoidSDK"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

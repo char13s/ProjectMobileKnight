@@ -1,4 +1,4 @@
-﻿
+
 namespace VRoidSDK.Examples.Core.Localize
 {
     public class ExampleViewKey

@@ -1,7 +1,6 @@
-﻿using System.IO;
-using System.Xml;
+using System.IO;
+using System.Xml.Linq;
 using UnityEditor;
-using UnityEngine;
 
 namespace Pixiv.VroidSdk.Editor
 {
@@ -26,10 +25,9 @@ namespace Pixiv.VroidSdk.Editor
 
         public static ManifestXmlDocument MakeManifestXml()
         {
-            XmlDocument androidManifestXml = new XmlDocument();
-            androidManifestXml.Load(AndroidManifestPath);
-            XmlElement root = androidManifestXml.DocumentElement;
-            root.SetAttribute("package", PlayerSettings.applicationIdentifier);
+            var androidManifestXml = XDocument.Load(AndroidManifestPath);
+            var root = androidManifestXml.Root;
+            root.SetAttributeValue("package", PlayerSettings.applicationIdentifier);
 
             return new ManifestXmlDocument(androidManifestXml);
         }

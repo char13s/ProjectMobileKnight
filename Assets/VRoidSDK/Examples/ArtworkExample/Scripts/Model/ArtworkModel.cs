@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VRoidSDK.Examples.Core.Model;
 using UnityEngine;
 using Pixiv.VroidSdk.Api.DataModel;

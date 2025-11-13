@@ -1,4 +1,4 @@
-﻿using Pixiv.VroidSdk.Api.DataModel;
+using Pixiv.VroidSdk.Api.DataModel;
 
 namespace VRoidSDK.Examples.Core.Model
 {

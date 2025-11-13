@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,14 +9,14 @@ namespace UniGLTF
 {
     public static class AnimationImporterUtil
     {
-        private enum TangentMode
+        public enum TangentMode
         {
             Linear,
             Constant,
             Cubicspline
         }
 
-        private static TangentMode GetTangentMode(string interpolation)
+        public static TangentMode GetTangentMode(string interpolation)
         {
             if (string.IsNullOrEmpty(interpolation) || interpolation == glTFAnimationTarget.Interpolations.LINEAR.ToString())
             {
@@ -36,7 +36,7 @@ namespace UniGLTF
             }
         }
 
-        private static void CalculateTanget(List<Keyframe> keyframes, int current)
+        public static void CalculateTangent(List<Keyframe> keyframes, int current)
         {
             int back = current - 1;
             if (back < 0)
@@ -140,7 +140,7 @@ namespace UniGLTF
                             keyframes[i].Add(new Keyframe(time, reversed[i], 0, 0));
                             if (keyframes[i].Count > 0)
                             {
-                                CalculateTanget(keyframes[i], keyframes[i].Count - 1);
+                                CalculateTangent(keyframes[i], keyframes[i].Count - 1);
                             }
                         }
                         else if (tangentMode == TangentMode.Constant)
@@ -202,27 +202,34 @@ namespace UniGLTF
 
             foreach (var channel in animation.channels)
             {
-                var relativePath = RelativePathFrom(data.GLTF.nodes, root, data.GLTF.nodes[channel.target.node]);
-                switch (channel.target.path)
+                if (channel.target.node >= 0 && channel.target.node < data.GLTF.nodes.Count)
                 {
-                    case glTFAnimationTarget.PATH_TRANSLATION:
-                        SetTranslationAnimationCurve(data, animation, inverter, channel, clip, relativePath);
-                        break;
-                    case glTFAnimationTarget.PATH_ROTATION:
-                        SetRotationAnimationCurve(data, animation, inverter, channel, clip, relativePath);
-                        break;
-                    case glTFAnimationTarget.PATH_SCALE:
-                        SetScaleAnimationCurve(data, animation, channel, clip, relativePath);
-                        break;
-                    case glTFAnimationTarget.PATH_WEIGHT:
-                        SetBlendShapeAnimationCurve(data, animation, channel, clip, relativePath);
-                        break;
-                    default:
-                        Debug.LogWarningFormat("unknown path: {0}", channel.target.path);
-                        break;
-                }
+                    var relativePath = RelativePathFrom(data.GLTF.nodes, root, data.GLTF.nodes[channel.target.node]);
+                    switch (channel.target.path)
+                    {
+                        case glTFAnimationTarget.PATH_TRANSLATION:
+                            SetTranslationAnimationCurve(data, animation, inverter, channel, clip, relativePath);
+                            break;
+                        case glTFAnimationTarget.PATH_ROTATION:
+                            SetRotationAnimationCurve(data, animation, inverter, channel, clip, relativePath);
+                            break;
+                        case glTFAnimationTarget.PATH_SCALE:
+                            SetScaleAnimationCurve(data, animation, channel, clip, relativePath);
+                            break;
+                        case glTFAnimationTarget.PATH_WEIGHT:
+                            SetBlendShapeAnimationCurve(data, animation, channel, clip, relativePath);
+                            break;
+                        default:
+                            Debug.LogWarningFormat("unknown path: {0}", channel.target.path);
+                            break;
+                    }
 
-                await awaitCaller.NextFrameIfTimedOut();
+                    await awaitCaller.NextFrameIfTimedOut();
+                }
+                else
+                {
+                    Debug.LogWarning($"ConvertAnimationClipAsync: channel.target.node: out of range: 0<[{channel.target.node}]<{data.GLTF.nodes.Count}");
+                }
             }
 
             return clip;
@@ -235,7 +242,7 @@ namespace UniGLTF
             var input = data.GetArrayFromAccessor<float>(sampler.input);
             var output = data.FlatternFloatArrayFromAccessor(sampler.output);
 
-            AnimationImporterUtil.SetAnimationCurve(
+            SetAnimationCurve(
                 clip,
                 relativePath,
                 new string[] { "localPosition.x", "localPosition.y", "localPosition.z" },

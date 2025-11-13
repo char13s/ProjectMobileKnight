@@ -1,4 +1,4 @@
-﻿using Pixiv.VroidSdk.Api.DataModel; // Add DataModel reference
+using Pixiv.VroidSdk.Api.DataModel; // Add DataModel reference
 using VRoidSDK.Examples.Core.View;
 using VRoidSDK.Examples.Core.Model;
 using VRoidSDK.Examples.Core.Localize;

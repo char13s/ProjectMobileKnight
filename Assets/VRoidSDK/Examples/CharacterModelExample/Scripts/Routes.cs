@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Serialization;
 using System.Threading;
 using Pixiv.VroidSdk;
@@ -40,8 +40,10 @@ namespace VRoidSDK.Examples.CharacterModelExample
             _characterModelsController = new CharacterModelsController(_apiController);
             _characterModelDownloadController = new CharacterModelDownloadController();
             _characterModelPropertyController = new CharacterModelPropertyController(_apiController);
-            _loadedCharacterModelController = new LoadedCharacterModelController(_characterModelPropertyController, _eventHandler);
-            _characterModelDetailController = new CharacterModelDetailController(_apiController, _characterModelsController,
+            _loadedCharacterModelController =
+                new LoadedCharacterModelController(_characterModelPropertyController, _eventHandler);
+            _characterModelDetailController = new CharacterModelDetailController(_apiController,
+                _characterModelsController,
                 _characterModelDownloadController, _loadedCharacterModelController);
             ModelLoader.Initialize(config, _apiController.GetDownloadLicensePublishable(), _appPassword);
         }
@@ -51,7 +53,8 @@ namespace VRoidSDK.Examples.CharacterModelExample
             var asset = Resources.Load<TextAsset>("credential.json");
             if (asset == null)
             {
-                throw new NullReferenceException("You have to place the credential.json.bytes in any of the Resources folders");
+                throw new NullReferenceException(
+                    "You have to place the credential.json.bytes in any of the Resources folders");
             }
 
             try

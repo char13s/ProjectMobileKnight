@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ using Pixiv.VroidSdk.Cache;
 using Pixiv.VroidSdk.Cache.DataModel;
 using Pixiv.VroidSdk.Cache.Migrate;
 using Pixiv.VroidSdk.IO;
+using Pixiv.VroidSdk.Logger;
 using Pixiv.VroidSdk.Unity.Crypt;
 using UniGLTF;
 using UnityEngine;
@@ -45,6 +46,76 @@ namespace Pixiv.VroidSdk
             var storage = DownloadLicenseCacheStorage.Load(DownloadLicenseCacheStorageFilePath(config), maxCacheCount);
             s_cache = new ModelDataCache(downloadApi, cryptoFileReadWrite, storage, new LegacyCacheMigrator(config.SymbolPrefix, Application.persistentDataPath));
         }
+
+        /// <summary>
+        /// モデルのキャッシュを削除します
+        /// </summary>
+        /// <param name="config"><see cref="Initialize"/>で使用した、あるいは使用する予定のconfigを指定します</param>
+        /// <exception cref="InvalidOperationException">その他の理由で削除に失敗しました。</exception>
+        /// <remarks>
+        /// <see cref="ModelLoader.Initialize"/>を呼び出した後に呼び出した場合は、メモリからもキャッシュを削除します。
+        /// </remarks>
+        public static void DeleteModelCache(ISdkConfig config)
+        {
+            if (s_cache == null)
+            {
+                DeleteModelCacheFromFile(config);
+                return;
+            }
+
+            DeleteModelCacheFromFileAndMemory();
+        }
+
+        /// <summary>
+        /// モデルキャッシュをファイルとメモリから削除します
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// <see cref="DeleteModelCacheFromFileAndMemory"/>メソッドは<see cref="Initialize"/>を呼び出す前に呼んではいけません。
+        /// この例外を受け取った場合、ファイルのみを削除する<see cref="DeleteModelCacheFromFile"/>メソッドを呼んでください。
+        /// </exception>
+        private static void DeleteModelCacheFromFileAndMemory()
+        {
+            // キャッシュ初期化済みの状態で削除する
+            if (s_cache == null)
+            {
+                throw new InvalidOperationException("MultiplayModelLoader is not initialized. Use DeleteModelCacheFromFile instead of DeleteModelCacheFromFileAndMemory.");
+            }
+
+            s_cache.DeleteStorage();
+        }
+
+        /// <summary>
+        /// モデルキャッシュのファイルを削除します。
+        ///
+        /// <see cref="Initialize"/>メソッドの初期化前のみ呼ぶことができます。
+        /// </summary>
+        /// <param name="config"></param>
+        /// <exception cref="InvalidOperationException">
+        /// <see cref="DeleteModelCacheFromFile"/>メソッドは<see cref="Initialize"/>を呼び出した後に呼んではいけません。
+        /// 初期化後であればファイルとメモリ上のキャッシュを同時に削除する<see cref="DeleteModelCacheFromFileAndMemory"/>メソッドを呼んでください。
+        /// </exception>
+        private static void DeleteModelCacheFromFile(ISdkConfig config)
+        {
+            if (s_cache != null)
+            {
+                throw new InvalidOperationException("ModelLoader is already initialized. Use DeleteModelCacheFromFileAndMemory instead of DeleteModelCacheFromFile.");
+            }
+
+            var storePath = DownloadLicenseCacheStorageFilePath(config);
+            try
+            {
+                File.Delete(storePath);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                // ファイルが存在しない場合のみ許容する
+            }
+            catch (Exception ex)
+            {
+                SdkLogger.LogException(ex);
+            }
+        }
+
 
         /// <summary>
         /// VRMモデルを読み込む

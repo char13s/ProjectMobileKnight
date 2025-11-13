@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -70,6 +70,13 @@ namespace UniGLTF
             {
                 path = path.Replace(x, '+');
             }
+
+            if (path.StartsWith('.'))
+                path = '+' + path;
+
+            if (path == "")
+                path = "(empty)";
+
             return path;
         }
 

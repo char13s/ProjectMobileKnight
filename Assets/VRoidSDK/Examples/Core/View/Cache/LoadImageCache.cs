@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace VRoidSDK.Examples.Core.View.Cache

@@ -1,24 +1,27 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace VRoidSDK.Examples.CharacterModelExample.Controller
 {
     public class ModelRotationController : MonoBehaviour
     {
-        private Vector3 _lastMousePosition;
+        private Vector2 _prevPosition;
+        private bool _isHolding;
 
-        // Update is called once per frame
-        private void Update()
+        public void OnPoint(InputValue value)
         {
-            if (Input.GetMouseButtonDown(0))
+            var position = value.Get<Vector2>();
+            if (_isHolding)
             {
-                _lastMousePosition = Input.mousePosition;
+                var delta = position - _prevPosition;
+                transform.rotation *= Quaternion.Euler(0, -delta.x / Screen.width * 180, 0);
             }
+            _prevPosition = position;
+        }
 
-            if (Input.GetMouseButton(0))
-            {
-                transform.rotation *= Quaternion.Euler(0, (_lastMousePosition - Input.mousePosition).x / Screen.width * 180, 0);
-                _lastMousePosition = Input.mousePosition;
-            }
+        public void OnClick(InputValue value)
+        {
+            _isHolding = value.Get<float>() != 0;
         }
 
         public void Reset()

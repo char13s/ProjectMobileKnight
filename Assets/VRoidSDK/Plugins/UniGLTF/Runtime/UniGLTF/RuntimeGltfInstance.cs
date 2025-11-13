@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UniGLTF.Utils;
 using UnityEngine;
 using VRMShaders;
@@ -166,9 +166,68 @@ namespace UniGLTF
             }
         }
 
+        public void ReplaceResource(UnityEngine.Object oldResource, UnityEngine.Object newResource)
+        {
+            if (oldResource == null || newResource == null || oldResource.GetType() != newResource.GetType())
+            {
+                Debug.LogError($"{nameof(RuntimeGltfInstance)} - Could not replace resource: mismatched or null types.");
+                return;
+            }
+            
+            for (int i = 0; i < _resources.Count; i++)
+            {
+                if (_resources[i].Item2 == oldResource)
+                {
+                    _resources[i] = (_resources[i].Item1, newResource);
+                    break;
+                }
+            }
+
+            switch (oldResource)
+            {
+                case Texture oldTexture when newResource is Texture newTexture:
+                    int texIndex = _textures.IndexOf(oldTexture);
+                    if (texIndex != -1)
+                    {
+                        _textures[texIndex] = newTexture;
+                    }
+                    break;
+
+                case Material oldMaterial when newResource is Material newMaterial:
+                    int matIndex = _materials.IndexOf(oldMaterial);
+                    if (matIndex != -1)
+                    {
+                        _materials[matIndex] = newMaterial;
+                    }
+                    break;
+
+                case AnimationClip oldClip when newResource is AnimationClip newClip:
+                    int clipIndex = _animationClips.IndexOf(oldClip);
+                    if (clipIndex != -1)
+                    {
+                        _animationClips[clipIndex] = newClip;
+                    }
+                    break;
+
+                case Mesh oldMesh when newResource is Mesh newMesh:
+                    int meshIndex = _meshes.IndexOf(oldMesh);
+                    if (meshIndex != -1)
+                    {
+                        _meshes[meshIndex] = newMesh;
+                    }
+                    break;
+            }
+
+            Destroy(oldResource);
+        }
+
+        public void AddResource<T>(T resource) where T : UnityEngine.Object
+        {
+            _resources.Add((SubAssetKey.Create(resource), resource));
+        }
+
         void OnDestroy()
         {
-            Debug.Log("UnityResourceDestroyer.OnDestroy");
             foreach (var (_, obj) in _resources)
             {
                 UnityObjectDestroyer.DestroyRuntimeOrEditor(obj);

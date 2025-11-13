@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using VRoidSDK.Examples.Core.Controller;
 using VRoidSDK.Examples.Core.Renderer;

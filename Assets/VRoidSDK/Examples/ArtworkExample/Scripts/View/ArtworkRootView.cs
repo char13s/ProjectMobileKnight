@@ -1,4 +1,4 @@
-﻿using VRoidSDK.Examples.Core.View;
+using VRoidSDK.Examples.Core.View;
 
 namespace VRoidSDK.Examples.ArtworkExample.View
 {
